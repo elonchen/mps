@@ -13,7 +13,7 @@
     foreach($about_type AS $row){
     ?>
     <tr bgcolor="#f5fbff">
-          <?php echo $id < 4 ? '<td><input class="checkbox" type='checkbox' name='delids[]' value='<?=$row[id]?>' id="<?=$row[id]?>" ></td>': '' ;?>
+          <?php echo $id < 4 ? '<td><input class="checkbox" type='checkbox' name='delids[]' value='$row[id]' id="<?=$row[id]?>" ></td>': '' ;?>
       <td valign="top" bgcolor="white"><?=$row[typename]?></td>
       <td align="center"><?=$row[dir_typename]?></td>
       <td align="center" bgcolor="white"><input name="displayorder[<?=$row[id]?>]" value="<?=$row[displayorder]?>" type="text" class="txt"/></td>
