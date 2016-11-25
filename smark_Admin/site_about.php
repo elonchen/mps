@@ -50,7 +50,7 @@ else
 		require_once( dirname( __FILE__ )."/include/pinyin.inc.php" );
 		$pubdate = $time;
 		$content = trim( $content );
-		if ( $id )
+		if ( !$id )
 		{
 			if ( empty( $typename ) )
 			{
