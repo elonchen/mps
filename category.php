@@ -430,16 +430,16 @@ switch ( $rewrite )
 		{
 			foreach ( $val['list'] as $k => $v )
 			{
-				$mymps_extra_model[$key]['list'][$k]['uri'] = "category";
+				$mymps_extra_model[$key]['list'][$k]['uri'] = "category.php?";
 				foreach ( $allow_identifiers as $keys )
 				{
 					if ( $v['identifier'] == $keys )
 					{
-						$mymps_extra_model[$key]['list'][$k]['uri'] .= $v[id] ? "?".$keys."=".$v[id] : "";
+						$mymps_extra_model[$key]['list'][$k]['uri'] .= $v[id] ? "&".$keys."=".$v[id] : "";
 					}
 					else
 					{
-						$mymps_extra_model[$key]['list'][$k]['uri'] .= $$keys ? "?".$keys."=".$$keys : "";
+						$mymps_extra_model[$key]['list'][$k]['uri'] .= $$keys ? "&".$keys."=".$$keys : "";
 					}
 				}
 				$mymps_extra_model[$key]['list'][$k]['uri'] .= "";
