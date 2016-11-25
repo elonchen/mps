@@ -348,8 +348,6 @@ switch ( $rewrite )
 				foreach ( $allow_identifiers as $ki => $keys )
 				{
 					
-						
-					}
 					if ( $v['identifier'] == $keys )
 					{
 						if ( !$ki==0 )
