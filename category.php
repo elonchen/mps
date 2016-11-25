@@ -337,6 +337,7 @@ switch ( $rewrite )
 		$area_list[$key]['select'] = $val['areaid'] == $areaid ? "1" : 0;
 	}
 	break;
+	case "active" :
 	foreach ( $mymps_extra_model as $key => $val )
 	{
 		if ( is_array( $val['list'] ) )
@@ -344,19 +345,30 @@ switch ( $rewrite )
 			foreach ( $val['list'] as $k => $v )
 			{
 				$mymps_extra_model[$key]['list'][$k]['uri'] = "category.php?";
-				foreach ( $allow_identifiers as $keys )
+				foreach ( $allow_identifiers as $ki => $keys )
 				{
+					
+						
+					}
 					if ( $v['identifier'] == $keys )
 					{
-						$mymps_extra_model[$key]['list'][$k]['uri'] .= $v['id'] ? $keys."=".$v[id]."&" : "";
+						if ( !$ki==0 )
+						{
+							$mymps_extra_model[$key]['list'][$k]['uri'] .= $v[id] ? "&" : "";
+						}
+						$mymps_extra_model[$key]['list'][$k]['uri'] .= $v[id] ? $keys."=".$v[id] : "";
 					}
 					else
 					{
-						$mymps_extra_model[$key]['list'][$k]['uri'] .= $$keys ? $keys."=".$$keys."&" : "";
+						if ( !$ki==0 )
+						{
+							$mymps_extra_model[$key]['list'][$k]['uri'] .= $v[id] ? "&" : "";
+						}
+						$mymps_extra_model[$key]['list'][$k]['uri'] .= $$keys ? $keys."=".$$keys : "";
 					}
 				}
-				$mymps_extra_model[$key]['list'][$k]['uri'] = substr( $mymps_extra_model[$key]['list'][$k]['uri'], 0, -1 );
-				if ( $v[id] == $$v[identifier] )
+				$mymps_extra_model[$key]['list'][$k]['uri'] .= "";
+				if ( $v['id'] == $$v['identifier'] )
 				{
 					$mymps_extra_model[$key]['list'][$k]['select'] .= "1";
 					$page_title_extra .= $v[name] != "不限" ? $v[name] : "";
@@ -420,93 +432,6 @@ switch ( $rewrite )
 			}
 		}
 		$area_list[$key]['uri'] = substr( $area_list[$key]['uri'], 0, -1 );
-		$area_list[$key]['select'] = $val['areaid'] == $areaid ? "1" : 0;
-	}
-	break;
-	case "active" :
-	foreach ( $mymps_extra_model as $key => $val )
-	{
-		if ( is_array( $val['list'] ) )
-		{
-			foreach ( $val['list'] as $k => $v )
-			{
-				$mymps_extra_model[$key]['list'][$k]['uri'] = "category.php?";
-				foreach ( $allow_identifiers as $keys )
-				{
-					if ( $v['identifier'] == $keys )
-					{
-						$mymps_extra_model[$key]['list'][$k]['uri'] .= $v[id] ? "&".$keys."=".$v[id] : "";
-					}
-					else
-					{
-						$mymps_extra_model[$key]['list'][$k]['uri'] .= $$keys ? "&".$keys."=".$$keys : "";
-					}
-				}
-				$mymps_extra_model[$key]['list'][$k]['uri'] .= "";
-				if ( $v['id'] == $$v['identifier'] )
-				{
-					$mymps_extra_model[$key]['list'][$k]['select'] .= "1";
-					$page_title_extra .= $v[name] != "不限" ? $v[name] : "";
-				}
-				else
-				{
-					$mymps_extra_model[$key]['list'][$k]['select'] .= "0";
-				}
-			}
-		}
-	}
-	if ( !$city['cityid'] )
-	{
-		break;
-	}
-	$area_list = $city['area'];
-	if ( $areaid )
-	{
-		$street_list = $city['area'][$areaid]['street'];
-		if ( $street_list && is_array( $street_list ) )
-		{
-			foreach ( $street_list as $key => $val )
-			{
-				$street_list[$key]['uri'] = "category";
-				foreach ( $allow_identifiers as $keys )
-				{
-					if ( $keys == "streetid" )
-					{
-						$street_list[$key]['uri'] .= $val['streetid'] ? "-".$keys."-".$val[streetid] : "";
-					}
-					else
-					{
-						$street_list[$key]['uri'] .= $$keys ? "-".$keys."-".$$keys : "";
-					}
-				}
-				$street_list[$key]['uri'] .= ".html";
-				$street_list[$key]['select'] = $val['streetid'] == $streetid ? "1" : 0;
-			}
-		}
-	}
-	if ( !is_array( $area_list ) )
-	{
-		break;
-	}
-	$streetid = "";
-	$area_list = array_merge( array(
-		"0" => array( "areaid" => "0", "areaname" => "不限" )
-		), $area_list );
-	foreach ( $area_list as $key => $val )
-	{
-		$area_list[$key]['uri'] = "category";
-		foreach ( $allow_identifiers as $keys )
-		{
-			if ( $keys == "areaid" )
-			{
-				$area_list[$key]['uri'] .= $val['areaid'] ? "-".$keys."-".$val[areaid] : "";
-			}
-			else
-			{
-				$area_list[$key]['uri'] .= $$keys ? "-".$keys."-".$$keys : "";
-			}
-		}
-		$area_list[$key]['uri'] .= ".html";
 		$area_list[$key]['select'] = $val['areaid'] == $areaid ? "1" : 0;
 	}
 	break;
